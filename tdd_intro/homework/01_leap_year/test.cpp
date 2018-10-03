@@ -23,7 +23,6 @@ bool IsLeapYear(const int year)
         {
             return true;
         }
-
     }
     return false;
 }
@@ -48,8 +47,22 @@ TEST(LeapYear, NegativeYear)
     ASSERT_TRUE(IsLeapYear(-2000));
 }
 
-TEST(LealYear, ZeroYear)
+TEST(LeapYear, ZeroYear)
 {
     ASSERT_TRUE(IsLeapYear(0));
 }
 
+TEST(LeapYear, Acceptance)
+{
+    ASSERT_TRUE(IsLeapYear(4));
+    ASSERT_TRUE(IsLeapYear(16));
+    ASSERT_TRUE(IsLeapYear(1804));
+    ASSERT_TRUE(IsLeapYear(1992));
+    ASSERT_TRUE(IsLeapYear(2400));
+
+    ASSERT_FALSE(IsLeapYear(3));
+    ASSERT_FALSE(IsLeapYear(1100));
+    ASSERT_FALSE(IsLeapYear(1814));
+    ASSERT_FALSE(IsLeapYear(1995));
+    ASSERT_FALSE(IsLeapYear(2200));
+}
