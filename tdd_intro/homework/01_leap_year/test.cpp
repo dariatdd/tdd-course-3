@@ -17,7 +17,15 @@ If your language provides a method in the standard library that does this look-u
 
 bool IsLeapYear(const int year)
 {
-    return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
+    if (year % 4 == 0)
+    {
+        if (year % 100 != 0 || year % 400 == 0)
+        {
+            return true;
+        }
+
+    }
+    return false;
 }
 
 TEST(LeapYear, DivisibleBy4)
@@ -44,3 +52,4 @@ TEST(LealYear, ZeroYear)
 {
     ASSERT_TRUE(IsLeapYear(0));
 }
+
