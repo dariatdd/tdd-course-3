@@ -34,3 +34,13 @@ TEST(LeapYear, DivisibleBy400)
 {
     ASSERT_TRUE(IsLeapYear(2000));
 }
+
+TEST(LeapYear, NegativeYear)
+{
+    ASSERT_TRUE(IsLeapYear(-2000));
+}
+
+TEST(LealYear, ZeroYear)
+{
+    ASSERT_TRUE(IsLeapYear(0));
+}
