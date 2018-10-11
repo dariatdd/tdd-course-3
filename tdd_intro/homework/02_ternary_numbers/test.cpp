@@ -27,3 +27,8 @@ TEST(TernaryNumber, OneConvertsToOneTest)
 {
     EXPECT_EQ(1, ConvertTernaryToDecimal("1"));
 }
+
+TEST(TernaryNumber, ConvertValidTernaryNumberTest)
+{
+    EXPECT_EQ(5, ConvertTernaryToDecimal("012"));
+}
