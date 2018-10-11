@@ -28,6 +28,11 @@ int ConvertTernaryToDecimal(const std::string& ternaryNumber)
 
     for(int i = numberLen - 1; i >= 0; --i)
     {
+        int currentSymbol = static_cast<int>(ternaryNumber[i]) - s_ascii_shift;
+        if(currentSymbol > 3 || currentSymbol < 0)
+        {
+            return 0;
+        }
         sum += (ternaryNumber[i] - s_ascii_shift) * value;
         value *= s_ternary_base;
     }
