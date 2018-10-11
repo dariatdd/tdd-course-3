@@ -25,10 +25,10 @@ bool IsValidTernaryDigit(int digit)
      return (digit <= 3 && digit >= 0);
 }
 
-int ConvertTernaryToDecimal(const std::string& ternaryNumber)
+long long ConvertTernaryToDecimal(const std::string& ternaryNumber)
 {
-    int sum = 0;
-    long value = 1;
+    long long sum = 0;
+    long long value = 1;
     int numberLen = ternaryNumber.length();
 
     for(int i = numberLen - 1; i >= 0; --i)
@@ -69,5 +69,5 @@ TEST(TernaryNumber, InvalidTernaryNumberTest)
 
 TEST(TernaryNumber, BigTernaryNumberTest)
 {
-    EXPECT_EQ(10460353203, ConvertTernaryToDecimal("100000000000000000000"));
+    EXPECT_EQ(10460353203, ConvertTernaryToDecimal("1000000000000000000000"));
 }
