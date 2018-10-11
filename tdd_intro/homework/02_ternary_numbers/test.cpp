@@ -66,3 +66,8 @@ TEST(TernaryNumber, InvalidTernaryNumberTest)
 {
     EXPECT_EQ(0, ConvertTernaryToDecimal("502012"));
 }
+
+TEST(TernaryNumber, BigTernaryNumberTest)
+{
+    EXPECT_EQ(10460353203, ConvertTernaryToDecimal("100000000000000000000"));
+}
