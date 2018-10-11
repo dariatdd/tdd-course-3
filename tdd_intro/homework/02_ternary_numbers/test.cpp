@@ -39,7 +39,7 @@ long long ConvertTernaryToDecimal(const std::string& ternaryNumber)
             return 0;
         }
 
-        sum += (ternaryNumber[i] - s_ascii_shift) * value;
+        sum += currentSymbol * value;
         value *= s_ternary_base;
     }
 
