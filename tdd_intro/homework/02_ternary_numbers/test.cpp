@@ -50,3 +50,8 @@ TEST(TernaryNumber, ConvertAnotherValidTernaryNumberTest)
 {
     EXPECT_EQ(302, ConvertTernaryToDecimal("102012"));
 }
+
+TEST(TernaryNumber, InvalidTernaryNumberTest)
+{
+    EXPECT_EQ(0, ConvertTernaryToDecimal("502012"));
+}
