@@ -19,12 +19,15 @@ If your language provides a method in the standard library to perform the conver
 
 int ConvertTernaryToDecimal(const std::string& ternaryNumber)
 {
-    if(ternaryNumber == "012")
+    int sum = 0;
+    long value = 1;
+    for(int i = ternaryNumber.length() - 1; i >= 0; --i)
     {
-        return 5;
+        sum += (ternaryNumber[i] - 48) * value;
+        value *= 3;
     }
 
-    return std::stoi(ternaryNumber);
+    return sum;
 }
 
 
