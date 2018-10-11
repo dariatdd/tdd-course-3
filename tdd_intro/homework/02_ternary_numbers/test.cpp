@@ -19,11 +19,11 @@ If your language provides a method in the standard library to perform the conver
 
 int ConvertTernaryToDecimal(const std::string& ternaryNumber)
 {
-    return 1;
+    return std::stoi(ternaryNumber);
 }
 
 
-TEST(TernaryNumber, BaseTest)
+TEST(TernaryNumber, OneConvertsToOneTest)
 {
     EXPECT_EQ(1, ConvertTernaryToDecimal("1"));
 }
