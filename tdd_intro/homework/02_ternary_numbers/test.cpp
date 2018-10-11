@@ -40,5 +40,5 @@ TEST(TernaryNumber, ConvertValidTernaryNumberTest)
 
 TEST(TernaryNumber, ConvertAnotherValidTernaryNumberTest)
 {
-    EXPECT_EQ(5, ConvertTernaryToDecimal("102012"));
+    EXPECT_EQ(302, ConvertTernaryToDecimal("102012"));
 }
