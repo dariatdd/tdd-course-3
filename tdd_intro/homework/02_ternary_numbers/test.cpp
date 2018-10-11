@@ -17,14 +17,19 @@ The last place in a ternary number is the 1's place. The second to last is the 3
 If your language provides a method in the standard library to perform the conversion, pretend it doesn't exist and implement it yourself.
 */
 
+const int s_ternary_base = 3;
+const int s_ascii_shift = 48;
+
 int ConvertTernaryToDecimal(const std::string& ternaryNumber)
 {
     int sum = 0;
     long value = 1;
-    for(int i = ternaryNumber.length() - 1; i >= 0; --i)
+    int numberLen = ternaryNumber.length();
+
+    for(int i = numberLen - 1; i >= 0; --i)
     {
-        sum += (ternaryNumber[i] - 48) * value;
-        value *= 3;
+        sum += (ternaryNumber[i] - s_ascii_shift) * value;
+        value *= s_ternary_base;
     }
 
     return sum;
