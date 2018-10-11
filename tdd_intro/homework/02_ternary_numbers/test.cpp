@@ -71,3 +71,16 @@ TEST(TernaryNumber, BigTernaryNumberTest)
 {
     EXPECT_EQ(10460353203, ConvertTernaryToDecimal("1000000000000000000000"));
 }
+
+TEST(TernaryNumber, IsValidTernaryDigitNegativeTest)
+{
+    EXPECT_FALSE(IsValidTernaryDigit(-45));
+}
+
+TEST(TernaryNumber, AcceptanceTest)
+{
+    EXPECT_EQ(0, ConvertTernaryToDecimal("0"));
+    EXPECT_EQ(12, ConvertTernaryToDecimal("33"));
+    EXPECT_EQ(0, ConvertTernaryToDecimal("567"));
+    EXPECT_EQ(0, ConvertTernaryToDecimal("(567)bh"));
+}
