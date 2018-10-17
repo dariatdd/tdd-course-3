@@ -195,3 +195,10 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
                                      "  | _| _||_||_ |_   ||_||_|",
                                      "  ||_  _|  | _||_|  ||_| _|"
 };
+
+
+TEST(CheckDigitLine, EmptyString)
+{
+    EXPECT_THROW(CheckDigitLine("", ""), std::exception);
+}
+
