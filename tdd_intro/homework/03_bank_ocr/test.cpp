@@ -198,7 +198,7 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
 
 bool CheckDigitLine(const std::string& line, const std::string& lineToCompare)
 {
-    if(line.empty())
+    if(line.empty() || line.length() != 3)
     {
         throw std::exception("Invalid format");
     }
@@ -211,7 +211,7 @@ TEST(CheckDigitLine, EmptyString)
     EXPECT_THROW(CheckDigitLine("", ""), std::exception);
 }
 
-TEST(CheckDigitLine, LessThat3CharsString)
+TEST(CheckDigitLine, LessThan3CharsString)
 {
     EXPECT_THROW(CheckDigitLine("__", "__"), std::exception);
 }
