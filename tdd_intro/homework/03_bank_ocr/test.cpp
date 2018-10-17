@@ -220,3 +220,8 @@ TEST(CheckDigitLine, ValidString)
 {
     EXPECT_TRUE(CheckDigitLine("_ _", "_ _"));
 }
+
+TEST(CheckDigitLine, NotEqualStrings)
+{
+    EXPECT_FALSE(CheckDigitLine("_ _", "___"));
+}
