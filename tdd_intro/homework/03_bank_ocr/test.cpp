@@ -203,7 +203,7 @@ bool CheckDigitLine(const std::string& line, const std::string& lineToCompare)
         throw std::exception("Invalid format");
     }
 
-    return true;
+    return line.compare(lineToCompare) == 0;
 }
 
 TEST(CheckDigitLine, EmptyString)
