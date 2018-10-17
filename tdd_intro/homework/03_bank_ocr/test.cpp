@@ -211,3 +211,7 @@ TEST(CheckDigitLine, EmptyString)
     EXPECT_THROW(CheckDigitLine("", ""), std::exception);
 }
 
+TEST(CheckDigitLine, LessThat3CharsString)
+{
+    EXPECT_THROW(CheckDigitLine("__", "__"), std::exception);
+}
