@@ -262,3 +262,8 @@ TEST(ConvertDigit, Convert0Digit)
 {
     EXPECT_EQ(ConvertDigit(s_digit0), 0);
 }
+
+TEST(ConvertDigit, Convert1Digit)
+{
+    EXPECT_EQ(ConvertDigit(s_digit1), 1);
+}
