@@ -246,6 +246,16 @@ unsigned short ConvertDigit(const Digit& digit)
     throw std::exception("Invalid digit");
 }
 
+unsigned int ConvertDisplay(const Display& display)
+{
+    if(display.lines.empty())
+    {
+        throw std::exception("Invalid display format");
+    }
+
+    return 0;
+}
+
 TEST(CheckDigitLine, EmptyString)
 {
     EXPECT_THROW(CheckDigitLine("", ""), std::exception);
