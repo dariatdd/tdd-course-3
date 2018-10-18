@@ -289,3 +289,12 @@ TEST(ConvertDigit, Convert1Digit)
 {
     EXPECT_EQ(ConvertDigit(s_digit1), 1);
 }
+
+TEST(ConvertDigit, ConvertInvalidDigit)
+{
+    Digit g = {{ "___",
+                "_ _"
+                "___"
+              }, 0};
+    EXPECT_THROW(ConvertDigit(s_digit1), std::exception);
+}
