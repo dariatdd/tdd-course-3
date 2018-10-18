@@ -243,7 +243,7 @@ unsigned short ConvertDigit(const Digit& digit)
         }
     }
 
-    return -1;
+    throw std::exception("Invalid digit");
 }
 
 TEST(CheckDigitLine, EmptyString)
@@ -296,5 +296,5 @@ TEST(ConvertDigit, ConvertInvalidDigit)
                 "_ _"
                 "___"
               }, 0};
-    EXPECT_THROW(ConvertDigit(s_digit1), std::exception);
+    EXPECT_THROW(ConvertDigit(g), std::exception);
 }
