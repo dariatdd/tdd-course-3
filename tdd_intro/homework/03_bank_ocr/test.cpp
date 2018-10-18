@@ -298,3 +298,9 @@ TEST(ConvertDigit, ConvertInvalidDigit)
               }, 0};
     EXPECT_THROW(ConvertDigit(g), std::exception);
 }
+
+TEST(ConvertDisplay, ConvertEmptyDisplay)
+{
+    Display d;
+    EXPECT_THROW(ConvertDisplay(d), std::exception);
+}
