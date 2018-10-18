@@ -241,3 +241,11 @@ TEST(ConvertDigit, EmptyDigit)
     EXPECT_THROW(ConvertDigit(g), std::exception);
 }
 
+
+TEST(ConvertDigit, InvalidNumberOfLinesDigit)
+{
+    Digit g = {{ "___",
+                "_ _"
+              }};
+    EXPECT_THROW(ConvertDigit(g), std::exception);
+}
