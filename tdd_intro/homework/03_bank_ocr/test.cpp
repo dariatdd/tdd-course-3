@@ -384,3 +384,12 @@ TEST(GetDigit, GetLastDigit)
     Digit digit = GetDigitFromDisplayWithOffset(d, 24);
     EXPECT_EQ(ConvertDigit(digit), 9);
 }
+
+TEST(ConvertDisplay, ConvertValidDisplay)
+{
+    Display d {{ "    _  _     _  _  _  _  _ ",
+                 "  | _| _||_||_ |_   ||_||_|",
+                 "  ||_  _|  | _||_|  ||_| _|"
+    }};
+    EXPECT_EQ(ConvertDisplay(d), 123456789);
+}
