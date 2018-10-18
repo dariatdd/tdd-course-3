@@ -249,3 +249,8 @@ TEST(ConvertDigit, InvalidNumberOfLinesDigit)
               }};
     EXPECT_THROW(ConvertDigit(g), std::exception);
 }
+
+TEST(ConvertDigit, Convert0Digit)
+{
+    EXPECT_EQ(ConvertDigit(s_digit0), 0);
+}
