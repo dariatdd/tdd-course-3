@@ -402,3 +402,18 @@ TEST(ConvertDisplay, ConvertValidDisplay)
     }};
     EXPECT_EQ(ConvertDisplay(d), 123456789);
 }
+
+TEST(ConvertDisplay, ConvertAllEqualDisplay)
+{
+    EXPECT_EQ(ConvertDisplay(s_displayAll0), 000000000);
+    EXPECT_EQ(ConvertDisplay(s_displayAll5), 555555555);
+}
+
+TEST(ConvertDisplay, ConvertInvalidDisplay)
+{
+    Display d {{ "    _  _     _  _  _  _  _ ",
+                 "  | _|/_||_||_ |_   ||_||_|",
+                 "  ||_  _|  | _||_|  ||_| _|"
+    }};
+    EXPECT_THROW(ConvertDisplay(d), std::exception);
+}
