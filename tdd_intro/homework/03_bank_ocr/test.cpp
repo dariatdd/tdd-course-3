@@ -206,6 +206,11 @@ bool CheckDigitLine(const std::string& line, const std::string& lineToCompare)
     return line.compare(lineToCompare) == 0;
 }
 
+unsigned short ConvertDigit(const Digit& digit)
+{
+    throw std::exception("Invalid format");
+}
+
 TEST(CheckDigitLine, EmptyString)
 {
     EXPECT_THROW(CheckDigitLine("", ""), std::exception);
