@@ -92,6 +92,7 @@ const unsigned short g_linesInDigit = 3;
 struct Digit
 {
     std::vector<std::string> lines;
+    unsigned short number;
 };
 
 const unsigned short g_digitsOnDisplay = 9;
@@ -103,43 +104,53 @@ struct Display
 const Digit s_digit0 = {{ " _ ",
                           "| |",
                           "|_|"
-                           }};
+                           },
+                       0};
 const Digit s_digit1 = {{ "   ",
                           "  |",
                           "  |"
-                       }};
+                       },
+                       1};
 const Digit s_digit2 = {{ " _ ",
                           " _|",
                           "|_ "
-                       }};
+                       },
+                       2};
 const Digit s_digit3 = {{ " _ ",
                           " _|",
                           " _|"
-                       }};
+                       },
+                       3};
 const Digit s_digit4 = {{ "   ",
                           "|_|",
                           "  |"
-                       }};
+                       },
+                       4};
 const Digit s_digit5 = {{ " _ ",
                           "|_ ",
                           " _|"
-                       }};
+                       },
+                       5};
 const Digit s_digit6 = {{ " _ ",
                           "|_ ",
                           "|_|"
-                       }};
+                       },
+                       6};
 const Digit s_digit7 = {{ " _ ",
                           "  |",
                           "  |"
-                       }};
+                       },
+                       7};
 const Digit s_digit8 = {{ " _ ",
                           "|_|",
                           "|_|"
-                       }};
+                       },
+                       8};
 const Digit s_digit9 = {{ " _ ",
                           "|_|",
                           " _|"
-                       }};
+                       },
+                       9};
 
 const Display s_displayAll0 = {{ " _  _  _  _  _  _  _  _  _ ",
                                  "| || || || || || || || || |",
@@ -196,6 +207,8 @@ const Display s_display123456789 = {{ "    _  _     _  _  _  _  _ ",
                                       "  ||_  _|  | _||_|  ||_| _|"
 }};
 
+const std::vector<Digit> s_allDigits = {s_digit0, s_digit1, s_digit2, s_digit3, s_digit4, s_digit5, s_digit6, s_digit7, s_digit8, s_digit9};
+
 bool CheckDigitLine(const std::string& line, const std::string& lineToCompare)
 {
     if(line.empty() || line.length() != g_digitLen)
@@ -213,14 +226,24 @@ unsigned short ConvertDigit(const Digit& digit)
         throw std::exception("Invalid format");
     }
 
-    for(int i = 0; i < g_linesInDigit; ++i)
+    for(const auto& pattern: s_allDigits)
     {
-        if(!CheckDigitLine(digit.lines[0], s_digit0.lines[0]))
+        bool matched = true;
+        for(int i = 0; i < g_linesInDigit; ++i)
         {
-            return 1;
+            if(!CheckDigitLine(digit.lines[0], pattern.lines[0]))
+            {
+                matched = false;
+                break;
+            }
+        }
+        if(matched)
+        {
+            return pattern.number;
         }
     }
-    return 0;
+
+    return -1;
 }
 
 TEST(CheckDigitLine, EmptyString)
