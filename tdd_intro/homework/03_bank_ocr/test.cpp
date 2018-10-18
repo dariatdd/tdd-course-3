@@ -271,7 +271,16 @@ unsigned int ConvertDisplay(const Display& display)
         }
     }
 
-    return 0;
+    std::string result;
+
+    for(int i = 0; i <= g_displayLineLength - g_digitLen; i = i + g_digitLen)
+    {
+        Digit digit = GetDigitFromDisplayWithOffset(display, i);
+        int number = ConvertDigit(digit);
+        result += '0' + number;
+    }
+
+    return std::stoi(result);
 }
 
 TEST(CheckDigitLine, EmptyString)
