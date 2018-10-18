@@ -346,3 +346,14 @@ TEST(ConvertDigit, Convert3Digit)
 {
     EXPECT_EQ(ConvertDigit(s_digit3), 3);
 }
+
+
+TEST(GetDigit, GetFirstDigit)
+{
+    Display d {{ "    _  _     _  _  _  _ ",
+                 "  | _| _||_||_ |_   ||_|",
+                 "  ||_  _|  | _||_|  ||_|"
+    }};
+    Digit digit = GetDigitFromDisplayWithOffset(d, 0);
+    EXPECT_EQ(ConvertDigit(digit), 1);
+}
