@@ -253,6 +253,14 @@ unsigned int ConvertDisplay(const Display& display)
         throw std::exception("Invalid display format");
     }
 
+    for(const auto& line: display.lines)
+    {
+        if(line.size() != 27)
+        {
+            throw std::exception("Invalid display format");
+        }
+    }
+
     return 0;
 }
 
