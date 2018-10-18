@@ -212,7 +212,15 @@ unsigned short ConvertDigit(const Digit& digit)
     {
         throw std::exception("Invalid format");
     }
-    return -1;
+
+    for(int i = 0; i < g_linesInDigit; ++i)
+    {
+        if(!CheckDigitLine(digit.lines[0], s_digit0.lines[0]))
+        {
+            return -1;
+        }
+    }
+    return 0;
 }
 
 TEST(CheckDigitLine, EmptyString)
