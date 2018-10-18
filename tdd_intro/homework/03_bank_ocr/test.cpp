@@ -341,3 +341,8 @@ TEST(ConvertDisplay, ConvertDisplayLessThan27CharsInLine)
     }};
     EXPECT_THROW(ConvertDisplay(d), std::exception);
 }
+
+TEST(ConvertDigit, Convert3Digit)
+{
+    EXPECT_EQ(ConvertDigit(s_digit3), 3);
+}
