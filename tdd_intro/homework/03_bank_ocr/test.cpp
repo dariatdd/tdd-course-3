@@ -209,6 +209,8 @@ const Display s_display123456789 = {{ "    _  _     _  _  _  _  _ ",
 
 const std::vector<Digit> s_allDigits = {s_digit0, s_digit1, s_digit2, s_digit3, s_digit4, s_digit5, s_digit6, s_digit7, s_digit8, s_digit9};
 
+const unsigned short g_displayLineLength = 27;
+
 bool CheckDigitLine(const std::string& line, const std::string& lineToCompare)
 {
     if(line.empty() || line.length() != g_digitLen)
@@ -255,7 +257,7 @@ unsigned int ConvertDisplay(const Display& display)
 
     for(const auto& line: display.lines)
     {
-        if(line.size() != 27)
+        if(line.size() != g_displayLineLength)
         {
             throw std::exception("Invalid display format");
         }
