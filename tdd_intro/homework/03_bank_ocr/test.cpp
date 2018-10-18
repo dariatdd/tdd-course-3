@@ -314,3 +314,11 @@ TEST(ConvertDisplay, ConvertEmptyDisplay)
     Display d;
     EXPECT_THROW(ConvertDisplay(d), std::exception);
 }
+
+TEST(ConvertDisplay, ConvertDisplayLessThan3Lines)
+{
+    Display d {{ "    _  _     _  _  _  _  _ ",
+                 "  | _| _||_||_ |_   ||_||_|",
+    }};
+    EXPECT_THROW(ConvertDisplay(d), std::exception);
+}
