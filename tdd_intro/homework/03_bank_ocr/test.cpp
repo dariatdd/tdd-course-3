@@ -248,6 +248,14 @@ unsigned short ConvertDigit(const Digit& digit)
     throw std::exception("Invalid digit");
 }
 
+Digit GetDigitFromDisplayWithOffset(const Display& display, const int offset)
+{
+    Digit digit = {{display.lines[0].substr(offset, g_digitLen),
+                   display.lines[1].substr(offset, g_digitLen),
+                   display.lines[2].substr(offset, g_digitLen)}};
+    return digit;
+}
+
 unsigned int ConvertDisplay(const Display& display)
 {
     if(display.lines.empty() || display.lines.size() != g_linesInDigit)
@@ -346,7 +354,6 @@ TEST(ConvertDigit, Convert3Digit)
 {
     EXPECT_EQ(ConvertDigit(s_digit3), 3);
 }
-
 
 TEST(GetDigit, GetFirstDigit)
 {
