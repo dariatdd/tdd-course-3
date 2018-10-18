@@ -250,9 +250,12 @@ unsigned short ConvertDigit(const Digit& digit)
 
 Digit GetDigitFromDisplayWithOffset(const Display& display, const int offset)
 {
-    Digit digit = {{display.lines[0].substr(offset, g_digitLen),
-                   display.lines[1].substr(offset, g_digitLen),
-                   display.lines[2].substr(offset, g_digitLen)}};
+    Digit digit;
+    for(int i = 0; i < g_linesInDigit; ++i)
+    {
+        digit.lines.push_back(display.lines[i].substr(offset, g_digitLen));
+    }
+
     return digit;
 }
 
