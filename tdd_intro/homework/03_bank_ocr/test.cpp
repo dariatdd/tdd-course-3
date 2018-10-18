@@ -364,3 +364,23 @@ TEST(GetDigit, GetFirstDigit)
     Digit digit = GetDigitFromDisplayWithOffset(d, 0);
     EXPECT_EQ(ConvertDigit(digit), 1);
 }
+
+TEST(GetDigit, Get4thDigit)
+{
+    Display d {{ "    _  _     _  _  _  _ ",
+                 "  | _| _||_||_ |_   ||_|",
+                 "  ||_  _|  | _||_|  ||_|"
+    }};
+    Digit digit = GetDigitFromDisplayWithOffset(d, 9);
+    EXPECT_EQ(ConvertDigit(digit), 4);
+}
+
+TEST(GetDigit, GetLastDigit)
+{
+    Display d {{ "    _  _     _  _  _  _  _ ",
+                 "  | _| _||_||_ |_   ||_||_|",
+                 "  ||_  _|  | _||_|  ||_| _|"
+    }};
+    Digit digit = GetDigitFromDisplayWithOffset(d, 24);
+    EXPECT_EQ(ConvertDigit(digit), 9);
+}
