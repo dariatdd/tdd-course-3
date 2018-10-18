@@ -217,7 +217,7 @@ unsigned short ConvertDigit(const Digit& digit)
     {
         if(!CheckDigitLine(digit.lines[0], s_digit0.lines[0]))
         {
-            return -1;
+            return 1;
         }
     }
     return 0;
@@ -248,7 +248,6 @@ TEST(ConvertDigit, EmptyDigit)
     Digit g;
     EXPECT_THROW(ConvertDigit(g), std::exception);
 }
-
 
 TEST(ConvertDigit, InvalidNumberOfLinesDigit)
 {
