@@ -225,3 +225,9 @@ TEST(CheckDigitLine, NotEqualStrings)
 {
     EXPECT_FALSE(CheckDigitLine("_ _", "___"));
 }
+
+TEST(ConvertDigit, EmptyDigit)
+{
+    Digit g;
+    EXPECT_THROW(ConvertDigit(g), std::exception);
+}
