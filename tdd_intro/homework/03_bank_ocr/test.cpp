@@ -233,7 +233,7 @@ unsigned short ConvertDigit(const Digit& digit)
         bool matched = true;
         for(int i = 0; i < g_linesInDigit; ++i)
         {
-            if(!CheckDigitLine(digit.lines[0], pattern.lines[0]))
+            if(!CheckDigitLine(digit.lines[i], pattern.lines[i]))
             {
                 matched = false;
                 break;
