@@ -208,7 +208,7 @@ bool CheckDigitLine(const std::string& line, const std::string& lineToCompare)
 
 unsigned short ConvertDigit(const Digit& digit)
 {
-    if(digit.lines.empty())
+    if(digit.lines.empty() || digit.lines.size() != g_linesInDigit)
     {
         throw std::exception("Invalid format");
     }
