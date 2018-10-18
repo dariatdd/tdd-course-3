@@ -248,7 +248,7 @@ unsigned short ConvertDigit(const Digit& digit)
 
 unsigned int ConvertDisplay(const Display& display)
 {
-    if(display.lines.empty())
+    if(display.lines.empty() || display.lines.size() != g_linesInDigit)
     {
         throw std::exception("Invalid display format");
     }
