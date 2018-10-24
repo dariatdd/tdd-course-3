@@ -109,6 +109,11 @@ public:
 };
 
 
+Weather ConvertStringToWeather(const std::string& rawData)
+{
+    throw std::runtime_error("Invalid format");
+}
+
 TEST(ConvertStringToWeather, EmptyString)
 {
     EXPECT_THROW(ConvertStringToWeather(""), std::runtime_error);
