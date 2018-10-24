@@ -44,6 +44,19 @@ IMPORTANT:
 2. Implement IWeatherClient using fake server.
 */
 
+/*
+  Assumptions:
+1. To get average/minimal/maximum marks WeatherClient asks server for weather for times 03:00, 09:00, 15:00 and 21:00 and then calculates necessary value based on these data.
+2. The weather is always returned from server in the further format 20;181;5.1 or as empty string in case of invalid request. The server returns data in valid format.
+
+  Architecture:
+1. WeatherClient is initialized with the implementation of IWeatherServer with functionality to get raw string with weather.
+2. Weather client parses the obtained raw string into Weather structure and uses it then to calculate average/minimal/maximum marks.
+3. There is a separate utils method ConvertStringToWeather to parse raw string to Weather object and list if strings to list of Weather objects.
+4. WeatherClient also has separate method GetWeatherMarksForDay for getting weather for all time periods during the day; returns list of strings
+
+*/
+
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
