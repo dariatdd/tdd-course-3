@@ -107,3 +107,9 @@ public:
     virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date) = 0;
     virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date) = 0;
 };
+
+
+TEST(ConvertStringToWeather, EmptyString)
+{
+    EXPECT_THROW(ConvertStringToWeather(""), std::runtime_error);
+}
