@@ -55,6 +55,21 @@ IMPORTANT:
 3. There is a separate utils method ConvertStringToWeather to parse raw string to Weather object and list if strings to list of Weather objects.
 4. WeatherClient also has separate method GetWeatherMarksForDay for getting weather for all time periods during the day; returns list of strings
 
+   Steps:
+ 1. Check ConvertStringToWeather with empty string
+ 2. Check ConvertStringToWeather with valid weather string
+ 3. Check ConvertStringToWeather with valid list of strings
+ 4. Implement IWeatherServer and IWeatherClient with stubs
+ 5. Check GetAverageTemperature for 31.08
+ 6. Acceptance for GetAverageTemperature: check for 01.09, 02.09
+ 7. Check GetMinimumTemperature for 31.08
+ 8. Acceptance for GetMinimumTemperature: check for 01.09, 02.09
+ 9. Check GetMaximumTemperature for 31.08
+ 10. Acceptance for GetMaximumTemperature: check for 01.09, 02.09
+ 11. Check GetAverageWindDirection for 31.08
+ 12. Acceptance for GetAverageWindDirection: check for 01.09, 02.09
+ 13. Check GetMaximumWindSpeed for 31.08
+ 14. Acceptance for GetMaximumWindSpeed: check for 01.09, 02.09
 */
 
 #include <gtest/gtest.h>
