@@ -275,5 +275,5 @@ TEST(GetAverageTemperature, For3108)
 {
    FakeWeatherServer server;
    WeatherClient client;
-   EXPECT_EQ(24, client.GetAverageTemperature(server, "31.08.2018"));
+   EXPECT_EQ(25.5, client.GetAverageTemperature(server, "31.08.2018"));
 }
