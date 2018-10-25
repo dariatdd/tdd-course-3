@@ -160,6 +160,13 @@ public:
                     Weather {33, 193, 4.3},
                     Weather {26, 179, 4.5}};
         }
+        else if(date == "01.09.2018")
+        {
+            return {Weather {19, 176, 4.2},
+                    Weather {22, 131, 4.9},
+                    Weather {31, 109, 4.0},
+                    Weather {24, 127, 4.1}};
+        }
 
         return WeatherList();
     }
