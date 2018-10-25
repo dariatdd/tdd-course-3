@@ -77,16 +77,9 @@ IMPORTANT:
 
 struct Weather
 {
-    short temperature = 0;
-    unsigned short windDirection = 0;
-    double windSpeed = 0;
-
-    Weather() {}
-    Weather (const short tempr, const unsigned short direction, const double speed):
-        temperature(tempr),
-        windDirection(direction),
-        windSpeed(speed)
-    {}
+    short temperature;
+    unsigned short windDirection;
+    double windSpeed;
 
     bool operator==(const Weather& right) const
     {
@@ -144,6 +137,6 @@ TEST(ConvertStringToWeather, EmptyString)
 
 TEST(ConvertStringToWeather, ValidString)
 {
-    Weather etalon (20, 181, 5.1);
+    Weather etalon {20, 181, 5.1};
     EXPECT_EQ(etalon, ConvertStringToWeather("20;181;5.1"));
 }
