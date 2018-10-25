@@ -130,6 +130,12 @@ Weather ConvertStringToWeather(const std::string& rawData)
     return weather;
 }
 
+std::vector<Weather> ConvertStringToWeather(const std::vector<std::string>& rawDataList)
+{
+    std::vector<Weather> result;
+    return result;
+}
+
 TEST(ConvertStringToWeather, EmptyString)
 {
     EXPECT_THROW(ConvertStringToWeather(""), std::runtime_error);
