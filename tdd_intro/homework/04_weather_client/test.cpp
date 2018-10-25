@@ -234,3 +234,14 @@ TEST(GetWeatherListForDate, Date3108)
     EXPECT_EQ(etalon, client.GetWeatherMarksForDay("31.08.2018"));
 }
 
+TEST(GetWeatherListForDate, Date0109)
+{
+    FakeWeatherServer server;
+    WeatherClient client(server);
+    WeatherList etalon = {Weather {19, 176, 4.2},
+                          Weather {22, 131, 4.9},
+                          Weather {31, 109, 4.0},
+                          Weather {24, 127, 4.1}};
+    EXPECT_EQ(etalon, client.GetWeatherMarksForDay("01.09.2018"));
+}
+
