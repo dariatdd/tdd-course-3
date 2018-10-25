@@ -133,6 +133,10 @@ Weather ConvertStringToWeather(const std::string& rawData)
 std::vector<Weather> ConvertStringToWeather(const std::vector<std::string>& rawDataList)
 {
     std::vector<Weather> result;
+    for(const auto& data: rawDataList)
+    {
+        result.push_back(ConvertStringToWeather(data));
+    }
     return result;
 }
 
