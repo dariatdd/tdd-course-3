@@ -371,3 +371,11 @@ TEST(GetAverageWindDirection, For3108)
    WeatherClient client;
    EXPECT_EQ(189.25, client.GetAverageWindDirection(server, "31.08.2018"));
 }
+
+TEST(GetAverageWindDirection, Acceptance)
+{
+   FakeWeatherServer server;
+   WeatherClient client;
+   EXPECT_EQ(135.75, client.GetAverageWindDirection(server, "01.09.2018"));
+   EXPECT_EQ(229, client.GetAverageWindDirection(server, "02.09.2018"));
+}
