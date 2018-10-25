@@ -270,3 +270,10 @@ TEST(GetWeatherListForDate, IncorrectServerRequest)
                          Weather {24, 127, 4.1}};
    EXPECT_THROW(client.GetWeatherMarksForDay(server, "01,09.2018"), std::runtime_error);
 }
+
+TEST(GetAverageTemperature, For3108)
+{
+   FakeWeatherServer server;
+   WeatherClient client;
+   EXPECT_EQ(24, client.GetAverageTemperature(server, "31.08.2018"));
+}
