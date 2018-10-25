@@ -252,3 +252,13 @@ TEST(GetWeatherListForDate, Date0109)
     EXPECT_EQ(etalon, client.GetWeatherMarksForDay("01.09.2018"));
 }
 
+TEST(GetWeatherListForDate, IncorrectServerRequest)
+{
+   FakeWeatherServer server;
+   WeatherClient client(server);
+   WeatherList etalon = {Weather {19, 176, 4.2},
+                         Weather {22, 131, 4.9},
+                         Weather {31, 109, 4.0},
+                         Weather {24, 127, 4.1}};
+   EXPECT_THROW(client.GetWeatherMarksForDay("01,09.2018"), std::runtime_error);
+}
