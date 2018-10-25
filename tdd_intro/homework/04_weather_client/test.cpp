@@ -89,6 +89,9 @@ struct Weather
     }
 };
 
+using WeatherList = std::vector<Weather>;
+using StringList = std::vector<std::string>;
+
 class IWeatherServer
 {
 public:
@@ -108,7 +111,6 @@ public:
     virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date) = 0;
     virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date) = 0;
 };
-
 
 Weather ConvertStringToWeather(const std::string& rawData)
 {
@@ -130,7 +132,7 @@ Weather ConvertStringToWeather(const std::string& rawData)
     return weather;
 }
 
-std::vector<Weather> ConvertStringToWeather(const std::vector<std::string>& rawDataList)
+WeatherList ConvertStringToWeather(const StringList& rawDataList)
 {
     std::vector<Weather> result;
     for(const auto& data: rawDataList)
@@ -153,13 +155,13 @@ TEST(ConvertStringToWeather, ValidString)
 
 TEST(ConvertStringListToWeatherList, EmptyList)
 {
-    EXPECT_EQ(std::vector<Weather>(), ConvertStringToWeather(std::vector<std::string>()));
+    EXPECT_EQ(WeatherList(), ConvertStringToWeather(std::vector<std::string>()));
 }
 
 TEST(ConvertStringListToWeatherList, ValidList)
 {
-    std::vector<std::string> inputData = {"20;181;5.1", "23;204;4.9"};
-    std::vector<Weather> etalon = {Weather {20, 181, 5.1},
-                                   Weather {23, 204, 4.9}};
+    StringList inputData = {"20;181;5.1", "23;204;4.9"};
+    WeatherList etalon = {Weather {20, 181, 5.1},
+                          Weather {23, 204, 4.9}};
     EXPECT_EQ(etalon,ConvertStringToWeather(inputData));
 }
