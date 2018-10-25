@@ -112,11 +112,33 @@ public:
     virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date) = 0;
 };
 
+Weather ConvertStringToWeather(const std::string& rawData);
+WeatherList ConvertStringToWeather(const StringList& rawDataList);
+
 class FakeWeatherServer : public IWeatherServer
 {
     virtual std::string GetWeather(const std::string& request) override
     {
-        return "";
+
+        static const std::map<std::string, std::string> weatherResults = {{"31.08.2018;03:00","20;181;5.1"},
+                                                                          {"31.08.2018;09:00", "23;204;4.9"},
+                                                                          {"31.08.2018;15:00", "33;193;4.3"},
+                                                                          {"31.08.2018;21:00", "26;179;4.5"},
+
+                                                                          {"01.09.2018;03:00", "19;176;4.2"},
+                                                                          {"01.09.2018;09:00", "22;131;4.1"},
+                                                                          {"01.09.2018;15:00", "31;109;4.0"},
+                                                                          {"01.09.2018;21:00", "24;127;4.1"},
+                                                                         };
+        auto valueIt = weatherResults.find(request);
+        if(valueIt != weatherResults.end())
+        {
+            return valueIt->second;
+        }
+        else
+        {
+            return "";
+        }
     }
 };
 
@@ -153,22 +175,14 @@ public:
 
     WeatherList GetWeatherMarksForDay(const std::string& date)
     {
-        if (date == "31.08.2018")
+        StringList weatherResults = {};
+        const StringList times = {"03:00", "09:00", "15:00", "21:00"};
+        for(const auto& time: times)
         {
-            return {Weather {20, 181, 5.1},
-                    Weather {23, 204, 4.9},
-                    Weather {33, 193, 4.3},
-                    Weather {26, 179, 4.5}};
-        }
-        else if(date == "01.09.2018")
-        {
-            return {Weather {19, 176, 4.2},
-                    Weather {22, 131, 4.9},
-                    Weather {31, 109, 4.0},
-                    Weather {24, 127, 4.1}};
+            weatherResults.push_back(m_server.GetWeather(date + ";" + time));
         }
 
-        return WeatherList();
+        return ConvertStringToWeather(weatherResults);
     }
 
 private:
@@ -246,7 +260,7 @@ TEST(GetWeatherListForDate, Date0109)
     FakeWeatherServer server;
     WeatherClient client(server);
     WeatherList etalon = {Weather {19, 176, 4.2},
-                          Weather {22, 131, 4.9},
+                          Weather {22, 131, 4.1},
                           Weather {31, 109, 4.0},
                           Weather {24, 127, 4.1}};
     EXPECT_EQ(etalon, client.GetWeatherMarksForDay("01.09.2018"));
