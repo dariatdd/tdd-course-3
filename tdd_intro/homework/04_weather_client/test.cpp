@@ -330,3 +330,11 @@ TEST(GetMiaximumTemperature, For3108)
    EXPECT_EQ(33, client.GetMaximumTemperature(server, "31.08.2018"));
 }
 
+TEST(GetMiaximumTemperature, Acceptance)
+{
+   FakeWeatherServer server;
+   WeatherClient client;
+   EXPECT_EQ(31, client.GetMaximumTemperature(server, "01.09.2018"));
+   EXPECT_EQ(34, client.GetMaximumTemperature(server, "02.09.2018"));
+}
+
