@@ -184,7 +184,13 @@ public:
 
     virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date) override
     {
-        return 0;
+        WeatherList weatherMarks = GetWeatherMarksForDay(server, date);
+        double windDirectionSum = 0.0;
+        for(const auto& mark: weatherMarks)
+        {
+            windDirectionSum += mark.windDirection;
+        }
+        return windDirectionSum / weatherMarks.size();
     }
 
     virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date) override
