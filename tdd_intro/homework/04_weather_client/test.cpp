@@ -308,3 +308,12 @@ TEST(GetMinimumTemperature, For3108)
    WeatherClient client;
    EXPECT_EQ(20, client.GetMinimumTemperature(server, "31.08.2018"));
 }
+
+TEST(GetMinimumTemperature, Acceptance)
+{
+   FakeWeatherServer server;
+   WeatherClient client;
+   EXPECT_EQ(19, client.GetMinimumTemperature(server, "01.09.2018"));
+   EXPECT_EQ(21, client.GetMinimumTemperature(server, "02.09.2018"));
+}
+
