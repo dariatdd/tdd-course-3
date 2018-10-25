@@ -81,6 +81,13 @@ struct Weather
     unsigned short windDirection = 0;
     double windSpeed = 0;
 
+    Weather() {}
+    Weather (const short tempr, const unsigned short direction, const double speed):
+        temperature(tempr),
+        windDirection(direction),
+        windSpeed(speed)
+    {}
+
     bool operator==(const Weather& right) const
     {
         return temperature == right.temperature &&
@@ -117,7 +124,17 @@ Weather ConvertStringToWeather(const std::string& rawData)
         throw std::runtime_error("Invalid format");
     }
 
-    return Weather();
+    Weather weather;
+
+    std::istringstream stream(rawData);
+    stream >> weather.temperature;
+
+    stream.ignore();
+    stream >> weather.windDirection;
+    stream.ignore();
+    stream >> weather.windSpeed;
+
+    return weather;
 }
 
 TEST(ConvertStringToWeather, EmptyString)
