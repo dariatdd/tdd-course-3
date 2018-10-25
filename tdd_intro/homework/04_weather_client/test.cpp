@@ -173,7 +173,13 @@ public:
 
     virtual double GetMaximumTemperature(IWeatherServer& server, const std::string& date) override
     {
-        return 0;
+        WeatherList weatherMarks = GetWeatherMarksForDay(server, date);
+        auto maxWeather = std::max_element(weatherMarks.begin(), weatherMarks.end(), [] (const Weather& left, const Weather& right)
+        {
+          return left.temperature < right.temperature;
+        });
+
+        return maxWeather->temperature;
     }
 
     virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date) override
@@ -317,7 +323,7 @@ TEST(GetMinimumTemperature, Acceptance)
    EXPECT_EQ(21, client.GetMinimumTemperature(server, "02.09.2018"));
 }
 
-TEST(GetMinimumTemperature, For3108)
+TEST(GetMiaximumTemperature, For3108)
 {
    FakeWeatherServer server;
    WeatherClient client;
