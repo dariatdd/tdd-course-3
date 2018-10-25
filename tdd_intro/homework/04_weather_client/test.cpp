@@ -189,7 +189,13 @@ public:
 
     virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date) override
     {
-       return 0;
+        WeatherList weatherMarks = GetWeatherMarksForDay(server, date);
+        auto maxWeather = std::max_element(weatherMarks.begin(), weatherMarks.end(), [] (const Weather& left, const Weather& right)
+        {
+          return left.windSpeed < right.windSpeed;
+        });
+
+        return maxWeather->windSpeed;
     }
 
     WeatherList GetWeatherMarksForDay(IWeatherServer& server, const std::string& date)
