@@ -119,7 +119,6 @@ class FakeWeatherServer : public IWeatherServer
 {
     virtual std::string GetWeather(const std::string& request) override
     {
-
         static const std::map<std::string, std::string> weatherResults = {{"31.08.2018;03:00","20;181;5.1"},
                                                                           {"31.08.2018;09:00", "23;204;4.9"},
                                                                           {"31.08.2018;15:00", "33;193;4.3"},
@@ -129,6 +128,11 @@ class FakeWeatherServer : public IWeatherServer
                                                                           {"01.09.2018;09:00", "22;131;4.1"},
                                                                           {"01.09.2018;15:00", "31;109;4.0"},
                                                                           {"01.09.2018;21:00", "24;127;4.1"},
+
+                                                                          {"02.09.2018;03:00", "21;158;3.8"},
+                                                                          {"02.09.2018;09:00", "25;201;3.5"},
+                                                                          {"02.09.2018;15:00", "34;258;3.7"},
+                                                                          {"02.09.2018;21:00", "27;299;4.0"},
                                                                          };
         auto valueIt = weatherResults.find(request);
         if(valueIt != weatherResults.end())
