@@ -140,3 +140,8 @@ TEST(ConvertStringToWeather, ValidString)
     Weather etalon {20, 181, 5.1};
     EXPECT_EQ(etalon, ConvertStringToWeather("20;181;5.1"));
 }
+
+TEST(ConvertStringListToWeatherList, EmptyList)
+{
+    EXPECT_EQ(std::vector<Weather>(), ConvertStringToWeather(std::vector<std::string>()));
+}
