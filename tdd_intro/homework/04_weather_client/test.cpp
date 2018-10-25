@@ -80,7 +80,8 @@ struct Weather
     short temperature = 0;
     unsigned short windDirection = 0;
     double windSpeed = 0;
-    bool operator==(const Weather& right)
+
+    bool operator==(const Weather& right) const
     {
         return temperature == right.temperature &&
                windDirection == right.windDirection &&
@@ -122,4 +123,10 @@ Weather ConvertStringToWeather(const std::string& rawData)
 TEST(ConvertStringToWeather, EmptyString)
 {
     EXPECT_THROW(ConvertStringToWeather(""), std::runtime_error);
+}
+
+TEST(ConvertStringToWeather, ValidString)
+{
+    Weather etalon (20, 181, 5.1);
+    EXPECT_EQ(etalon, ConvertStringToWeather("20;181;5.1"));
 }
