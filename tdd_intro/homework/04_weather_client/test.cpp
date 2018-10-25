@@ -153,10 +153,15 @@ public:
 
     WeatherList GetWeatherMarksForDay(const std::string& date)
     {
-        return {Weather {20, 181, 5.1},
-            Weather {23, 204, 4.9},
-            Weather {33, 193, 4.3},
-            Weather {26, 179, 4.5}};
+        if (date == "31.08.2018")
+        {
+            return {Weather {20, 181, 5.1},
+                    Weather {23, 204, 4.9},
+                    Weather {33, 193, 4.3},
+                    Weather {26, 179, 4.5}};
+        }
+
+        return WeatherList();
     }
 
 private:
@@ -228,3 +233,4 @@ TEST(GetWeatherListForDate, Date3108)
                           Weather {26, 179, 4.5}};
     EXPECT_EQ(etalon, client.GetWeatherMarksForDay("31.08.2018"));
 }
+
