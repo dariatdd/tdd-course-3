@@ -199,3 +199,15 @@ TEST(ConvertStringListToWeatherList, ValidList)
                           Weather {23, 204, 4.9}};
     EXPECT_EQ(etalon,ConvertStringToWeather(inputData));
 }
+
+
+TEST(GetWeatherListForDate, Date3108)
+{
+    FakeWeatherServer server;
+    WeatherClient client(server);
+    WeatherList etalon = {Weather {20, 181, 5.1},
+                          Weather {23, 204, 4.9},
+                          Weather {33, 193, 4.3},
+                          Weather {26, 179, 4.5},};
+    EXPECT_EQ(client.GetWeatherMarksForDay("31.08.2018"));
+}
