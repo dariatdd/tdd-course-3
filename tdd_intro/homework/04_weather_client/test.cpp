@@ -145,9 +145,6 @@ class FakeWeatherServer : public IWeatherServer
 class WeatherClient : public IWeatherClient
 {
 public:
-    WeatherClient(IWeatherServer& serverImpl): m_server(serverImpl)
-    { }
-
     virtual double GetAverageTemperature(IWeatherServer& server, const std::string& date) override
     {
         return 0;
@@ -173,20 +170,17 @@ public:
        return 0;
     }
 
-    WeatherList GetWeatherMarksForDay(const std::string& date)
+    WeatherList GetWeatherMarksForDay(IWeatherServer& server, const std::string& date)
     {
         StringList weatherResults = {};
         const StringList times = {"03:00", "09:00", "15:00", "21:00"};
         for(const auto& time: times)
         {
-            weatherResults.push_back(m_server.GetWeather(date + ";" + time));
+            weatherResults.push_back(server.GetWeather(date + ";" + time));
         }
 
         return ConvertStringToWeather(weatherResults);
     }
-
-private:
-    IWeatherServer& m_server;
 };
 
 Weather ConvertStringToWeather(const std::string& rawData)
@@ -247,32 +241,32 @@ TEST(ConvertStringListToWeatherList, ValidList)
 TEST(GetWeatherListForDate, Date3108)
 {
     FakeWeatherServer server;
-    WeatherClient client(server);
+    WeatherClient client;
     WeatherList etalon = {Weather {20, 181, 5.1},
                           Weather {23, 204, 4.9},
                           Weather {33, 193, 4.3},
                           Weather {26, 179, 4.5}};
-    EXPECT_EQ(etalon, client.GetWeatherMarksForDay("31.08.2018"));
+    EXPECT_EQ(etalon, client.GetWeatherMarksForDay(server, "31.08.2018"));
 }
 
 TEST(GetWeatherListForDate, Date0109)
 {
     FakeWeatherServer server;
-    WeatherClient client(server);
+    WeatherClient client;
     WeatherList etalon = {Weather {19, 176, 4.2},
                           Weather {22, 131, 4.1},
                           Weather {31, 109, 4.0},
                           Weather {24, 127, 4.1}};
-    EXPECT_EQ(etalon, client.GetWeatherMarksForDay("01.09.2018"));
+    EXPECT_EQ(etalon, client.GetWeatherMarksForDay(server, "01.09.2018"));
 }
 
 TEST(GetWeatherListForDate, IncorrectServerRequest)
 {
    FakeWeatherServer server;
-   WeatherClient client(server);
+   WeatherClient client;
    WeatherList etalon = {Weather {19, 176, 4.2},
                          Weather {22, 131, 4.9},
                          Weather {31, 109, 4.0},
                          Weather {24, 127, 4.1}};
-   EXPECT_THROW(client.GetWeatherMarksForDay("01,09.2018"), std::runtime_error);
+   EXPECT_THROW(client.GetWeatherMarksForDay(server, "01,09.2018"), std::runtime_error);
 }
