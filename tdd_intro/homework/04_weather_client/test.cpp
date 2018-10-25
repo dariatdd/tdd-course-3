@@ -295,3 +295,10 @@ TEST(GetAverageTemperature, Acceptance)
    EXPECT_EQ(24, client.GetAverageTemperature(server, "01.09.2018"));
    EXPECT_EQ(26.75, client.GetAverageTemperature(server, "02.09.2018"));
 }
+
+TEST(GetMinimumTemperature, For3108)
+{
+   FakeWeatherServer server;
+   WeatherClient client;
+   EXPECT_EQ(20, client.GetMaximumTemperature(server, "31.08.2018"));
+}
