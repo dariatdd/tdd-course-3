@@ -112,6 +112,14 @@ public:
     virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date) = 0;
 };
 
+class FakeWeatherServer : public IWeatherServer
+{
+    virtual std::string GetWeather(const std::string& request) override
+    {
+        return "";
+    }
+};
+
 class WeatherClient : public IWeatherClient
 {
 public:
@@ -142,6 +150,15 @@ public:
     {
        return 0;
     }
+
+    WeatherList GetWeatherMarksForDay(const std::string& date)
+    {
+        return {Weather {20, 181, 5.1},
+            Weather {23, 204, 4.9},
+            Weather {33, 193, 4.3},
+            Weather {26, 179, 4.5}};
+    }
+
 private:
     IWeatherServer& m_server;
 };
@@ -208,6 +225,6 @@ TEST(GetWeatherListForDate, Date3108)
     WeatherList etalon = {Weather {20, 181, 5.1},
                           Weather {23, 204, 4.9},
                           Weather {33, 193, 4.3},
-                          Weather {26, 179, 4.5},};
-    EXPECT_EQ(client.GetWeatherMarksForDay("31.08.2018"));
+                          Weather {26, 179, 4.5}};
+    EXPECT_EQ(etalon, client.GetWeatherMarksForDay("31.08.2018"));
 }
