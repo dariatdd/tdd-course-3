@@ -147,7 +147,13 @@ class WeatherClient : public IWeatherClient
 public:
     virtual double GetAverageTemperature(IWeatherServer& server, const std::string& date) override
     {
-        return 0;
+        WeatherList weatherMarks = GetWeatherMarksForDay(server, date);
+        double temperatureSum = 0.0;
+        for(const auto& mark: weatherMarks)
+        {
+            temperatureSum += mark.temperature;
+        }
+        return temperatureSum / weatherMarks.size();
     }
 
     virtual double GetMinimumTemperature(IWeatherServer& server, const std::string& date) override
