@@ -358,3 +358,10 @@ TEST(GetMaximumWindSpeed, Acceptance)
    EXPECT_EQ(4.2, client.GetMaximumWindSpeed(server, "01.09.2018"));
    EXPECT_EQ(4.0, client.GetMaximumWindSpeed(server, "02.09.2018"));
 }
+
+TEST(GetAverageWindDirection, For3108)
+{
+   FakeWeatherServer server;
+   WeatherClient client;
+   EXPECT_EQ(189.25, client.GetAverageWindDirection(server, "31.08.2018"));
+}
