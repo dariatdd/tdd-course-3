@@ -55,10 +55,10 @@ WrappedStrings WrapString(const std::string& str, size_t wrapLength)
             }
         }
 
-        auto pos = str.find_last_of(' ', i + curLimit);
-        if(pos != std::string::npos && (pos > i && pos < wrapLength))
+        auto pos = str.find_last_of(' ', i + wrapLength);
+        if(pos != std::string::npos && (pos > i) && i + wrapLength < str.length())
         {
-            curLimit = pos + 1;
+            curLimit = pos - i;
         }
         else
         {
