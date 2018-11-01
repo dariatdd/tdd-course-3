@@ -40,7 +40,7 @@ WrappedStrings WrapString(const std::string& str, size_t wrapLength)
     size_t curLimit = wrapLength;
     for(size_t i = 0; i < str.length(); i += curLimit)
     {
-        auto pos = str.find_first_of(' ');
+        auto pos = str.find_last_of(' ', i + curLimit);
         if(pos != std::string::npos && (pos > i && pos < wrapLength))
         {
             curLimit = pos + 1;
