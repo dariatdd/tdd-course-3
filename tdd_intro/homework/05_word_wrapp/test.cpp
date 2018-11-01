@@ -139,3 +139,10 @@ TEST(WrapString, OnlySpaces)
     WrappedStrings expected = {};
     ASSERT_EQ(expected, WrapString("    ", 2));
 }
+
+
+TEST(WrapString, OnlySpacesThreeSpacesInBlock)
+{
+    WrappedStrings expected = {};
+    ASSERT_EQ(expected, WrapString("      ", 3));
+}
