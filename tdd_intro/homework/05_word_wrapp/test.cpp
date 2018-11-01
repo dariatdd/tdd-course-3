@@ -158,3 +158,13 @@ TEST(WrapString, WrapLimitAtWordEnd)
     WrappedStrings expected = {"123", "456"};
     ASSERT_EQ(expected, WrapString("123 456", 3));
 }
+
+TEST(WrapString, LongStringWithSpacesAfterWrap)
+{
+    WrappedStrings expected = {"When pos is specified, the",
+                               "search only includes sequences",
+                               "of characters that begin at or",
+                               "before position pos, ignoring",};
+    ASSERT_EQ(expected, WrapString("When pos is specified, the search only includes sequences of characters that begin at or before position pos, ignoring", 30));
+}
+
