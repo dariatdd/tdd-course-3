@@ -18,14 +18,18 @@ ignoring any possible match beginning after pos
 #include <gtest/gtest.h>
 #include <cctype>
 
+
 // empty string
 // string shorter than wrap number
 // word longer than wrap number
 // word much longer than wrap number (more than 2 strings)
 // string longer than wrap number
+// string ends with one whitespace longer than limit
 
-// string wrapped by several whitespaces (less than wrapLength)
-// string wrapped by several whitespaces (more than wrapLength)
+
+// string should be wrapped by space if it is present under limit (two words in string, space before limit)
+// string should be wrapped by space if it is present under limit (three words in string, two spaces before limit)
+// string should be wrapped by space if it is present under limit (three words in string, no space before limit)
 // only whitespaces in string
 
 using WrappedStrings = std::vector<std::string>;
@@ -33,9 +37,21 @@ using WrappedStrings = std::vector<std::string>;
 WrappedStrings WrapString(const std::string& str, size_t wrapLength)
 {
     WrappedStrings result;
-    for(size_t i = 0; i < str.length(); i += wrapLength)
+    size_t curLimit = wrapLength;
+    for(size_t i = 0; i < str.length(); i += curLimit)
     {
-        std::string cur = str.substr(i, wrapLength);
+        auto pos = str.find_first_of(' ');
+        std::cout << "POs: " << pos << std::endl;
+        if(pos != std::string::npos && (pos > i && pos < wrapLength))
+        {
+            curLimit = pos + 1;
+        }
+        else
+        {
+            curLimit = wrapLength;
+        }
+
+        std::string cur = str.substr(i, curLimit);
         if (cur.back() == ' ')
         {
             cur.pop_back();
@@ -101,8 +117,8 @@ TEST(WrapString, StringEndsWithOneWhitespace)
     ASSERT_EQ(expected, WrapString("123 ", 3));
 }
 
-TEST(WrapString, MultipleWhitespaceAtWrapLimit)
+TEST(WrapString, TwoWordsSpaceBeforeLimit)
 {
-    WrappedStrings expected = {"123", "4", "56"};
-    ASSERT_EQ(expected, WrapString("123  456", 3));
+    WrappedStrings expected = {"1", "234"};
+    ASSERT_EQ(expected, WrapString("1 234", 3));
 }
