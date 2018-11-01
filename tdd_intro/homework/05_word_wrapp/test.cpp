@@ -56,13 +56,13 @@ WrappedStrings WrapString(const std::string& str, size_t wrapLength)
             cur.pop_back();
         }
 
+        if(!cur.empty() && cur.front() == ' ')
+        {
+            cur = cur.substr(1);
+        }
+
         if(!cur.empty())
         {
-            if(cur.front() == ' ')
-            {
-                cur = cur.substr(1);
-            }
-
             result.push_back(cur);
         }
     }
