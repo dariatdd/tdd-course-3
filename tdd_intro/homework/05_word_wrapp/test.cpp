@@ -61,7 +61,7 @@ WrappedStrings WrapString(const std::string& str, size_t wrapLength)
             cur = cur.substr(1);
         }
 
-        if(!cur.empty())
+        if(!cur.empty() && cur != " ")
         {
             result.push_back(cur);
         }
