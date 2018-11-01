@@ -128,8 +128,14 @@ TEST(WrapString, ThreeWordsTwoSpaceBeforeLimit)
     ASSERT_EQ(expected, WrapString("1 2 345", 5));
 }
 
-TEST(WrapString,TwoWordsNoSpaceBeforeLimit)
+TEST(WrapString, TwoWordsNoSpaceBeforeLimit)
 {
     WrappedStrings expected = {"12", "3", "45"};
     ASSERT_EQ(expected, WrapString("123 45", 2));
+}
+
+TEST(WrapString, OnlySpaces)
+{
+    WrappedStrings expected = {};
+    ASSERT_EQ(expected, WrapString("    ", 2));
 }
