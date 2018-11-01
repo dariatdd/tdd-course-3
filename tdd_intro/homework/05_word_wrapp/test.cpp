@@ -168,3 +168,14 @@ TEST(WrapString, LongStringWithSpacesAfterWrap)
     ASSERT_EQ(expected, WrapString("When pos is specified, the search only includes sequences of characters that begin at or before position pos, ignoring", 30));
 }
 
+TEST(WrapString, Acceptance)
+{
+    WrappedStrings expected = {"When pos is specified, the",
+                               "search only includes sequences",
+                               "of characters that begin at or",
+                               "before position pos, ignoring",
+                               "any possible match beginning",
+                               "after pos."};
+    ASSERT_EQ(expected, WrapString("When pos is specified, the search only includes sequences of characters that begin at or before position pos, "
+                                   "ignoring any possible match beginning after pos.", 30));
+}
