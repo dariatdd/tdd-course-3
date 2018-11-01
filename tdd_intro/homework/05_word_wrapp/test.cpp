@@ -34,6 +34,12 @@ ignoring any possible match beginning after pos
 
 using WrappedStrings = std::vector<std::string>;
 
+void TrimString(std::string& str)
+{
+   str.erase(0, str.find_first_not_of(' '));
+   str.erase(str.find_last_not_of(' ') + 1);
+}
+
 WrappedStrings WrapString(const std::string& str, size_t wrapLength)
 {
     WrappedStrings result;
@@ -51,15 +57,7 @@ WrappedStrings WrapString(const std::string& str, size_t wrapLength)
         }
 
         std::string cur = str.substr(i, curLimit);
-        if (cur.back() == ' ')
-        {
-            cur.pop_back();
-        }
-
-        if(!cur.empty() && cur.front() == ' ')
-        {
-            cur = cur.substr(1);
-        }
+        TrimString(cur);
 
         if(!cur.empty() && cur != " ")
         {
