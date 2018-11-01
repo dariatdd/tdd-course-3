@@ -46,6 +46,15 @@ WrappedStrings WrapString(const std::string& str, size_t wrapLength)
     size_t curLimit = wrapLength;
     for(size_t i = 0; i < str.length(); i += curLimit)
     {
+        if(str[i] == ' ')
+        {
+            auto pos = str.find_first_not_of(' ', i);
+            if(pos != std::string::npos)
+            {
+                i = pos;
+            }
+        }
+
         auto pos = str.find_last_of(' ', i + curLimit);
         if(pos != std::string::npos && (pos > i && pos < wrapLength))
         {
