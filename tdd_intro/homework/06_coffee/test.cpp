@@ -41,7 +41,8 @@ enum Cup
 enum Coffee
 {
     Americano,
-    Cappuccino
+    Cappuccino,
+    Latte
 };
 
 class MockSourceOfIngredients : public ISourceOfIngredients
@@ -168,4 +169,17 @@ TEST(CoffeeMachine, LargeCappuccino)
     EXPECT_CALL(si, AddMilkFoam(48)).Times(1);
 
     cm.CreateCoffee(Cup::Big, Coffee::Cappuccino);
+}
+
+TEST(CoffeeMachine, Latte)
+{
+    MockSourceOfIngredients si;
+    CoffeeMachine cm(si);
+
+    EXPECT_CALL(si, SetCupSize(100)).Times(1);
+    EXPECT_CALL(si, AddMilk(25)).Times(1);
+    EXPECT_CALL(si, AddCoffee(50)).Times(1);
+    EXPECT_CALL(si, AddMilkFoam(25)).Times(1);
+
+    cm.CreateCoffee(Cup::Normal, Coffee::Latte);
 }
