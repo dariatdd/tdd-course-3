@@ -88,10 +88,12 @@ private:
 
     void CreateCappuccino(int cupSize)
     {
+        int onePart = cupSize / 3;
+
         m_source.SetCupSize(cupSize);
-        m_source.AddMilk(cupSize / 3);
-        m_source.AddCoffee(cupSize / 3);
-        m_source.AddMilkFoam(cupSize / 3 + 1);
+        m_source.AddMilk(onePart);
+        m_source.AddCoffee(onePart);
+        m_source.AddMilkFoam(cupSize - 2 * onePart);
     }
 
 private:
