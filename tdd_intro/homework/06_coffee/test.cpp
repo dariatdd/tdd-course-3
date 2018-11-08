@@ -70,18 +70,30 @@ public:
 
         if(coffee == Coffee::Americano)
         {
-            m_source.AddCoffee(cupSize / 2);
-            m_source.SetCupSize(cupSize);
-            m_source.AddWater(cupSize / 2, 60);
+           CreateAmericano(cupSize);
         }
         else if(coffee == Coffee::Cappuccino)
         {
-            m_source.SetCupSize(cupSize);
-            m_source.AddMilk(cupSize / 3);
-            m_source.AddCoffee(cupSize / 3);
-            m_source.AddMilkFoam(cupSize / 3 + 1);
+            CreateCappuccino(cupSize);
         }
     }
+
+private:
+    void CreateAmericano(int cupSize)
+    {
+        m_source.AddCoffee(cupSize / 2);
+        m_source.SetCupSize(cupSize);
+        m_source.AddWater(cupSize / 2, 60);
+    }
+
+    void CreateCappuccino(int cupSize)
+    {
+        m_source.SetCupSize(cupSize);
+        m_source.AddMilk(cupSize / 3);
+        m_source.AddCoffee(cupSize / 3);
+        m_source.AddMilkFoam(cupSize / 3 + 1);
+    }
+
 private:
     ISourceOfIngredients& m_source;
 };
