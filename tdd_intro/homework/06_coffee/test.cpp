@@ -40,7 +40,8 @@ enum Cup
 
 enum Coffee
 {
-    Americano
+    Americano,
+    Cappuccino
 };
 
 class MockSourceOfIngredients : public ISourceOfIngredients
