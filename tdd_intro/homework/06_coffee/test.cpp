@@ -69,17 +69,23 @@ public:
     {
         int cupSize = static_cast<int>(cup);
 
-        if(coffee == Coffee::Americano)
+        switch(coffee)
         {
-           CreateAmericano(cupSize);
-        }
-        else if(coffee == Coffee::Cappuccino)
-        {
-            CreateCappuccino(cupSize);
-        }
-        else
-        {
-            CreateLatte(cupSize);
+            case Coffee::Americano:
+            {
+                CreateAmericano(cupSize);
+                break;
+            }
+            case Coffee::Cappuccino:
+            {
+                CreateCappuccino(cupSize);
+                break;
+            }
+        case Coffee::Latte:
+            {
+                CreateLatte(cupSize);
+                break;
+            }
         }
     }
 
