@@ -68,9 +68,19 @@ public:
     {
         int cupSize = static_cast<int>(cup);
 
-        m_source.AddCoffee(cupSize / 2);
-        m_source.SetCupSize(cupSize);
-        m_source.AddWater(cupSize / 2, 60);
+        if(coffee == Coffee::Americano)
+        {
+            m_source.AddCoffee(cupSize / 2);
+            m_source.SetCupSize(cupSize);
+            m_source.AddWater(cupSize / 2, 60);
+        }
+        else if(coffee == Coffee::Cappuccino)
+        {
+            m_source.SetCupSize(cupSize);
+            m_source.AddMilk(cupSize / 3);
+            m_source.AddCoffee(cupSize / 3);
+            m_source.AddMilkFoam(cupSize / 3 + 1);
+        }
     }
 private:
     ISourceOfIngredients& m_source;
@@ -125,7 +135,7 @@ TEST(CoffeeMachine, Cappuccino)
     MockSourceOfIngredients si;
     CoffeeMachine cm(si);
 
-    EXPECT_CALL(si, SetCupSize(140)).Times(1);
+    EXPECT_CALL(si, SetCupSize(100)).Times(1);
     EXPECT_CALL(si, AddMilk(33)).Times(1);
     EXPECT_CALL(si, AddCoffee(33)).Times(1);
     EXPECT_CALL(si, AddMilkFoam(34)).Times(1);
