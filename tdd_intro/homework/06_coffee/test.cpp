@@ -82,9 +82,14 @@ public:
                 CreateCappuccino(cupSize);
                 break;
             }
-        case Coffee::Latte:
+            case Coffee::Latte:
             {
                 CreateLatte(cupSize);
+                break;
+            }
+            case Coffee::Marochino:
+            {
+                CreateMarochino(cupSize);
                 break;
             }
         }
@@ -116,6 +121,16 @@ private:
         m_source.AddMilk(onePart);
         m_source.AddCoffee(2 * onePart);
         m_source.AddMilkFoam(cupSize - 3 * onePart);
+    }
+
+    void CreateMarochino(int cupSize)
+    {
+        int onePart = cupSize / 4;
+
+        m_source.SetCupSize(cupSize);
+        m_source.AddChocolate(onePart);
+        m_source.AddCoffee(onePart);
+        m_source.AddMilkFoam(onePart);
     }
 
 private:
