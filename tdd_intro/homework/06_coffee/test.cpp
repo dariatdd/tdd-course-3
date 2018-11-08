@@ -245,3 +245,16 @@ TEST(CoffeeMachine, Marochino)
 
     cm.CreateCoffee(Cup::Normal, Coffee::Marochino);
 }
+
+TEST(CoffeeMachine, LargeMarochino)
+{
+    MockSourceOfIngredients si;
+    CoffeeMachine cm(si);
+
+    EXPECT_CALL(si, SetCupSize(140)).Times(1);
+    EXPECT_CALL(si, AddChocolate(35)).Times(1);
+    EXPECT_CALL(si, AddCoffee(35)).Times(1);
+    EXPECT_CALL(si, AddMilkFoam(35)).Times(1);
+
+    cm.CreateCoffee(Cup::Big, Coffee::Marochino);
+}
