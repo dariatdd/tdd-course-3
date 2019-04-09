@@ -18,35 +18,57 @@ ignoring any possible match beginning after pos
 #include <gtest/gtest.h>
 #include <cctype>
 
+
 // empty string
 // string shorter than wrap number
 // word longer than wrap number
 // word much longer than wrap number (more than 2 strings)
 // string longer than wrap number
+// string ends with one whitespace longer than limit
 
-// string wrapped by several whitespaces (less than wrapLength)
-// string wrapped by several whitespaces (more than wrapLength)
+
+// string should be wrapped by space if it is present under limit (two words in string, space before limit)
+// string should be wrapped by space if it is present under limit (three words in string, two spaces before limit)
+// string should be wrapped by space if it is present under limit (three words in string, no space before limit)
 // only whitespaces in string
 
 using WrappedStrings = std::vector<std::string>;
 
+void TrimString(std::string& str)
+{
+   str.erase(0, str.find_first_not_of(' '));
+   str.erase(str.find_last_not_of(' ') + 1);
+}
+
 WrappedStrings WrapString(const std::string& str, size_t wrapLength)
 {
     WrappedStrings result;
-    for(size_t i = 0; i < str.length(); i += wrapLength)
+    size_t curLimit = wrapLength;
+    for(size_t i = 0; i < str.length(); i += curLimit)
     {
-        std::string cur = str.substr(i, wrapLength);
-        if (cur.back() == ' ')
+        if(str[i] == ' ')
         {
-            cur.pop_back();
+            auto pos = str.find_first_not_of(' ', i);
+            if(pos != std::string::npos)
+            {
+                i = pos;
+            }
         }
 
-        if(!cur.empty() && cur.front() == ' ')
+        auto pos = str.find_last_of(' ', i + wrapLength);
+        if(pos != std::string::npos && (pos > i) && i + wrapLength < str.length())
         {
-            cur = cur.substr(1);
+            curLimit = pos - i;
+        }
+        else
+        {
+            curLimit = wrapLength;
         }
 
-        if(!cur.empty())
+        std::string cur = str.substr(i, curLimit);
+        TrimString(cur);
+
+        if(!cur.empty() && cur != " ")
         {
             result.push_back(cur);
         }
@@ -93,4 +115,67 @@ TEST(WrapString, StringWrappedBySeveralWhitespace)
 {
     WrappedStrings expected = {"12", "34"};
     ASSERT_EQ(expected, WrapString("12  34", 3));
+}
+
+TEST(WrapString, StringEndsWithOneWhitespace)
+{
+    WrappedStrings expected = {"123"};
+    ASSERT_EQ(expected, WrapString("123 ", 3));
+}
+
+TEST(WrapString, TwoWordsSpaceBeforeLimit)
+{
+    WrappedStrings expected = {"1", "234"};
+    ASSERT_EQ(expected, WrapString("1 234", 3));
+}
+
+TEST(WrapString, ThreeWordsTwoSpaceBeforeLimit)
+{
+    WrappedStrings expected = {"1 2", "345"};
+    ASSERT_EQ(expected, WrapString("1 2 345", 5));
+}
+
+TEST(WrapString, TwoWordsNoSpaceBeforeLimit)
+{
+    WrappedStrings expected = {"12", "3", "45"};
+    ASSERT_EQ(expected, WrapString("123 45", 2));
+}
+
+TEST(WrapString, OnlySpaces)
+{
+    WrappedStrings expected = {};
+    ASSERT_EQ(expected, WrapString("    ", 2));
+}
+
+TEST(WrapString, OnlySpacesThreeSpacesInBlock)
+{
+    WrappedStrings expected = {};
+    ASSERT_EQ(expected, WrapString("      ", 3));
+}
+
+TEST(WrapString, WrapLimitAtWordEnd)
+{
+    WrappedStrings expected = {"123", "456"};
+    ASSERT_EQ(expected, WrapString("123 456", 3));
+}
+
+TEST(WrapString, LongStringWithSpacesAfterWrap)
+{
+    WrappedStrings expected = {"When pos is specified, the",
+                               "search only includes sequences",
+                               "of characters that begin at or",
+                               "before position pos, ignoring",};
+    ASSERT_EQ(expected, WrapString("When pos is specified, the search only includes sequences of characters that begin at or before position pos, ignoring", 30));
+}
+
+TEST(WrapString, Acceptance)
+{
+    WrappedStrings expected = {"When pos is specified, the",
+                               "search only includes sequences",
+                               "of characters that begin at or",
+                               "before position pos, ignoring",
+                               "any possible match beginning",
+                               "after pos."};
+    ASSERT_EQ(expected, WrapString("When pos is specified, the search only includes sequences of characters that begin at or before position pos, "
+                                   "ignoring any possible match beginning after pos.", 30));
 }
