@@ -91,107 +91,332 @@ const unsigned short g_digitLen = 3;
 const unsigned short g_linesInDigit = 3;
 struct Digit
 {
-    std::string lines[g_linesInDigit];
+    std::vector<std::string> lines;
+    unsigned short number;
 };
 
 const unsigned short g_digitsOnDisplay = 9;
 struct Display
 {
-    std::string lines[g_linesInDigit];
+    std::vector<std::string> lines;
 };
 
-const Digit s_digit0 = { " _ ",
-                         "| |",
-                         "|_|"
-                       };
-const Digit s_digit1 = { "   ",
-                         "  |",
-                         "  |"
-                       };
-const Digit s_digit2 = { " _ ",
-                         " _|",
-                         "|_ "
-                       };
-const Digit s_digit3 = { " _ ",
-                         " _|",
-                         " _|"
-                       };
-const Digit s_digit4 = { "   ",
-                         "|_|",
-                         "  |"
-                       };
-const Digit s_digit5 = { " _ ",
-                         "|_ ",
-                         " _|"
-                       };
-const Digit s_digit6 = { " _ ",
-                         "|_ ",
-                         "|_|"
-                       };
-const Digit s_digit7 = { " _ ",
-                         "  |",
-                         "  |"
-                       };
-const Digit s_digit8 = { " _ ",
-                         "|_|",
-                         "|_|"
-                       };
-const Digit s_digit9 = { " _ ",
-                         "|_|",
-                         " _|"
-                       };
+const Digit s_digit0 = {{ " _ ",
+                          "| |",
+                          "|_|"
+                           },
+                       0};
+const Digit s_digit1 = {{ "   ",
+                          "  |",
+                          "  |"
+                       },
+                       1};
+const Digit s_digit2 = {{ " _ ",
+                          " _|",
+                          "|_ "
+                       },
+                       2};
+const Digit s_digit3 = {{ " _ ",
+                          " _|",
+                          " _|"
+                       },
+                       3};
+const Digit s_digit4 = {{ "   ",
+                          "|_|",
+                          "  |"
+                       },
+                       4};
+const Digit s_digit5 = {{ " _ ",
+                          "|_ ",
+                          " _|"
+                       },
+                       5};
+const Digit s_digit6 = {{ " _ ",
+                          "|_ ",
+                          "|_|"
+                       },
+                       6};
+const Digit s_digit7 = {{ " _ ",
+                          "  |",
+                          "  |"
+                       },
+                       7};
+const Digit s_digit8 = {{ " _ ",
+                          "|_|",
+                          "|_|"
+                       },
+                       8};
+const Digit s_digit9 = {{ " _ ",
+                          "|_|",
+                          " _|"
+                       },
+                       9};
 
-const Display s_displayAll0 = { " _  _  _  _  _  _  _  _  _ ",
-                                "| || || || || || || || || |",
-                                "|_||_||_||_||_||_||_||_||_|"
-};
+const Display s_displayAll0 = {{ " _  _  _  _  _  _  _  _  _ ",
+                                 "| || || || || || || || || |",
+                                 "|_||_||_||_||_||_||_||_||_|"
+}};
 
-const Display s_displayAll1 = { "                           ",
-                                "  |  |  |  |  |  |  |  |  |",
-                                "  |  |  |  |  |  |  |  |  |"
-};
+const Display s_displayAll1 = {{ "                           ",
+                                 "  |  |  |  |  |  |  |  |  |",
+                                 "  |  |  |  |  |  |  |  |  |"
+}};
 
-const Display s_displayAll2 = {  " _  _  _  _  _  _  _  _  _ ",
+const Display s_displayAll2 = {{  " _  _  _  _  _  _  _  _  _ ",
+                                  " _| _| _| _| _| _| _| _| _|",
+                                  "|_ |_ |_ |_ |_ |_ |_ |_ |_ "
+}};
+
+const Display s_displayAll3 = {{ " _  _  _  _  _  _  _  _  _ ",
                                  " _| _| _| _| _| _| _| _| _|",
-                                 "|_ |_ |_ |_ |_ |_ |_ |_ |_ "
-};
+                                 " _| _| _| _| _| _| _| _| _|"
+}};
 
-const Display s_displayAll3 = { " _  _  _  _  _  _  _  _  _ ",
-                                " _| _| _| _| _| _| _| _| _|",
-                                " _| _| _| _| _| _| _| _| _|"
-};
+const Display s_displayAll4 = {{ "                           ",
+                                 "|_||_||_||_||_||_||_||_||_|",
+                                 "  |  |  |  |  |  |  |  |  |"
+}};
 
-const Display s_displayAll4 = { "                           ",
-                                "|_||_||_||_||_||_||_||_||_|",
-                                "  |  |  |  |  |  |  |  |  |"
-};
+const Display s_displayAll5 = {{ " _  _  _  _  _  _  _  _  _ ",
+                                 "|_ |_ |_ |_ |_ |_ |_ |_ |_ ",
+                                 " _| _| _| _| _| _| _| _| _|"
+}};
 
-const Display s_displayAll5 = { " _  _  _  _  _  _  _  _  _ ",
-                                "|_ |_ |_ |_ |_ |_ |_ |_ |_ ",
-                                " _| _| _| _| _| _| _| _| _|"
-};
+const Display s_displayAll6 = {{ " _  _  _  _  _  _  _  _  _ ",
+                                 "|_ |_ |_ |_ |_ |_ |_ |_ |_ ",
+                                 "|_||_||_||_||_||_||_||_||_|"
+}};
 
-const Display s_displayAll6 = { " _  _  _  _  _  _  _  _  _ ",
-                                "|_ |_ |_ |_ |_ |_ |_ |_ |_ ",
-                                "|_||_||_||_||_||_||_||_||_|"
-};
+const Display s_displayAll7 = {{ " _  _  _  _  _  _  _  _  _ ",
+                                 "  |  |  |  |  |  |  |  |  |",
+                                 "  |  |  |  |  |  |  |  |  |"
+}};
 
-const Display s_displayAll7 = { " _  _  _  _  _  _  _  _  _ ",
-                                "  |  |  |  |  |  |  |  |  |",
-                                "  |  |  |  |  |  |  |  |  |"
-};
+const Display s_displayAll8 = {{ " _  _  _  _  _  _  _  _  _ ",
+                                 "|_||_||_||_||_||_||_||_||_|",
+                                 "|_||_||_||_||_||_||_||_||_|"
+}};
 
-const Display s_displayAll8 = { " _  _  _  _  _  _  _  _  _ ",
-                                "|_||_||_||_||_||_||_||_||_|",
-                                "|_||_||_||_||_||_||_||_||_|"
-};
+const Display s_displayAll9 = {{ " _  _  _  _  _  _  _  _  _ ",
+                                 "|_||_||_||_||_||_||_||_||_|",
+                                 " _| _| _| _| _| _| _| _| _|"
+}};
 
-const Display s_displayAll9 = { " _  _  _  _  _  _  _  _  _ ",
-                                "|_||_||_||_||_||_||_||_||_|",
-                                " _| _| _| _| _| _| _| _| _|"
-};
+const Display s_display123456789 = {{ "    _  _     _  _  _  _  _ ",
+                                      "  | _| _||_||_ |_   ||_||_|",
+                                      "  ||_  _|  | _||_|  ||_| _|"
+}};
 
-const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
-                                     "  | _| _||_||_ |_   ||_||_|",
-                                     "  ||_  _|  | _||_|  ||_| _|"
-};
+const std::vector<Digit> s_allDigits = {s_digit0, s_digit1, s_digit2, s_digit3, s_digit4, s_digit5, s_digit6, s_digit7, s_digit8, s_digit9};
+
+const unsigned short g_displayLineLength = 27;
+
+bool CheckDigitLine(const std::string& line, const std::string& lineToCompare)
+{
+    if(line.empty() || line.length() != g_digitLen)
+    {
+        throw std::exception("Invalid format");
+    }
+
+    return line.compare(lineToCompare) == 0;
+}
+
+unsigned short ConvertDigit(const Digit& digit)
+{
+    if(digit.lines.empty() || digit.lines.size() != g_linesInDigit)
+    {
+        throw std::exception("Invalid format");
+    }
+
+    for(const auto& pattern: s_allDigits)
+    {
+        bool matched = true;
+        for(int i = 0; i < g_linesInDigit; ++i)
+        {
+            if(!CheckDigitLine(digit.lines[i], pattern.lines[i]))
+            {
+                matched = false;
+                break;
+            }
+        }
+        if(matched)
+        {
+            return pattern.number;
+        }
+    }
+
+    throw std::exception("Invalid digit");
+}
+
+Digit GetDigitFromDisplayWithOffset(const Display& display, const int offset)
+{
+    Digit digit;
+    for(int i = 0; i < g_linesInDigit; ++i)
+    {
+        digit.lines.push_back(display.lines[i].substr(offset, g_digitLen));
+    }
+
+    return digit;
+}
+
+unsigned int ConvertDisplay(const Display& display)
+{
+    if(display.lines.empty() || display.lines.size() != g_linesInDigit)
+    {
+        throw std::exception("Invalid display format");
+    }
+
+    for(const auto& line: display.lines)
+    {
+        if(line.size() != g_displayLineLength)
+        {
+            throw std::exception("Invalid display format");
+        }
+    }
+
+    std::string result;
+
+    for(int i = 0; i <= g_displayLineLength - g_digitLen; i = i + g_digitLen)
+    {
+        Digit digit = GetDigitFromDisplayWithOffset(display, i);
+        int number = ConvertDigit(digit);
+        result += '0' + number;
+    }
+
+    return std::stoi(result);
+}
+
+TEST(CheckDigitLine, EmptyString)
+{
+    EXPECT_THROW(CheckDigitLine("", ""), std::exception);
+}
+
+TEST(CheckDigitLine, LessThan3CharsString)
+{
+    EXPECT_THROW(CheckDigitLine("__", "__"), std::exception);
+}
+
+TEST(CheckDigitLine, ValidString)
+{
+    EXPECT_TRUE(CheckDigitLine("_ _", "_ _"));
+}
+
+TEST(CheckDigitLine, NotEqualStrings)
+{
+    EXPECT_FALSE(CheckDigitLine("_ _", "___"));
+}
+
+TEST(ConvertDigit, EmptyDigit)
+{
+    Digit g;
+    EXPECT_THROW(ConvertDigit(g), std::exception);
+}
+
+TEST(ConvertDigit, InvalidNumberOfLinesDigit)
+{
+    Digit g = {{ "___",
+                "_ _"
+              }};
+    EXPECT_THROW(ConvertDigit(g), std::exception);
+}
+
+TEST(ConvertDigit, Convert0Digit)
+{
+    EXPECT_EQ(ConvertDigit(s_digit0), 0);
+}
+
+TEST(ConvertDigit, Convert1Digit)
+{
+    EXPECT_EQ(ConvertDigit(s_digit1), 1);
+}
+
+TEST(ConvertDigit, ConvertInvalidDigit)
+{
+    Digit g = {{ "___",
+                "_ _"
+                "___"
+              }, 0};
+    EXPECT_THROW(ConvertDigit(g), std::exception);
+}
+
+TEST(ConvertDisplay, ConvertEmptyDisplay)
+{
+    Display d;
+    EXPECT_THROW(ConvertDisplay(d), std::exception);
+}
+
+TEST(ConvertDisplay, ConvertDisplayLessThan3Lines)
+{
+    Display d {{ "    _  _     _  _  _  _  _ ",
+                 "  | _| _||_||_ |_   ||_||_|",
+    }};
+    EXPECT_THROW(ConvertDisplay(d), std::exception);
+}
+
+TEST(ConvertDisplay, ConvertDisplayLessThan27CharsInLine)
+{
+    Display d {{ "    _  _     _  _  _  _ ",
+                 "  | _| _||_||_ |_   ||_|",
+                 "  ||_  _|  | _||_|  ||_|"
+    }};
+    EXPECT_THROW(ConvertDisplay(d), std::exception);
+}
+
+TEST(ConvertDigit, Convert3Digit)
+{
+    EXPECT_EQ(ConvertDigit(s_digit3), 3);
+}
+
+TEST(GetDigit, GetFirstDigit)
+{
+    Display d {{ "    _  _     _  _  _  _ ",
+                 "  | _| _||_||_ |_   ||_|",
+                 "  ||_  _|  | _||_|  ||_|"
+    }};
+    Digit digit = GetDigitFromDisplayWithOffset(d, 0);
+    EXPECT_EQ(ConvertDigit(digit), 1);
+}
+
+TEST(GetDigit, Get4thDigit)
+{
+    Display d {{ "    _  _     _  _  _  _ ",
+                 "  | _| _||_||_ |_   ||_|",
+                 "  ||_  _|  | _||_|  ||_|"
+    }};
+    Digit digit = GetDigitFromDisplayWithOffset(d, 9);
+    EXPECT_EQ(ConvertDigit(digit), 4);
+}
+
+TEST(GetDigit, GetLastDigit)
+{
+    Display d {{ "    _  _     _  _  _  _  _ ",
+                 "  | _| _||_||_ |_   ||_||_|",
+                 "  ||_  _|  | _||_|  ||_| _|"
+    }};
+    Digit digit = GetDigitFromDisplayWithOffset(d, 24);
+    EXPECT_EQ(ConvertDigit(digit), 9);
+}
+
+TEST(ConvertDisplay, ConvertValidDisplay)
+{
+    Display d {{ "    _  _     _  _  _  _  _ ",
+                 "  | _| _||_||_ |_   ||_||_|",
+                 "  ||_  _|  | _||_|  ||_| _|"
+    }};
+    EXPECT_EQ(ConvertDisplay(d), 123456789);
+}
+
+TEST(ConvertDisplay, ConvertAllEqualDisplay)
+{
+    EXPECT_EQ(ConvertDisplay(s_displayAll0), 000000000);
+    EXPECT_EQ(ConvertDisplay(s_displayAll5), 555555555);
+}
+
+TEST(ConvertDisplay, ConvertInvalidDisplay)
+{
+    Display d {{ "    _  _     _  _  _  _  _ ",
+                 "  | _|/_||_||_ |_   ||_||_|",
+                 "  ||_  _|  | _||_|  ||_| _|"
+    }};
+    EXPECT_THROW(ConvertDisplay(d), std::exception);
+}
